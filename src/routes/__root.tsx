@@ -31,21 +31,23 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Our Community Links" },
-      { name: "description", content: "Connect with our community across all platforms — WhatsApp, Instagram, Pinterest & more." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Eathamozhi Masjid — Community Links" },
+      { name: "description", content: "Connect with the Eathamozhi Masjid community across all platforms — WhatsApp, Instagram, Facebook, YouTube & more." },
+      { property: "og:title", content: "Eathamozhi Masjid — Community Links" },
+      { property: "og:description", content: "Connect with the Eathamozhi Masjid community across all platforms — WhatsApp, Instagram, Facebook, YouTube & more." },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://lovable.dev/opengraph-image-p98pqg.png" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:image", content: "https://lovable.dev/opengraph-image-p98pqg.png" },
+      { name: "twitter:card", content: "summary" },
+      { name: "theme-color", content: "#0d9488" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "/favicon.svg",
       },
     ],
   }),
@@ -55,10 +57,29 @@ export const Route = createRootRoute({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ReligiousOrganization",
+    name: "Eathamozhi Masjid",
+    description: "Connect with the Eathamozhi Masjid community across all platforms",
+    url: "https://eathamozhi-masjid.netlify.app/",
+    sameAs: [
+      "https://whatsapp.com/channel/0029VaAIPXO9Bb5tR7L89o0n",
+      "https://chat.whatsapp.com/C649nwyeNOcLS9h0cOoWZU?mode=gi_t",
+      "https://www.instagram.com/masjidety",
+      "https://www.facebook.com/share/1aT3hWLE4c/",
+      "https://www.youtube.com/@masjidety",
+    ],
+  };
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body>
         {children}
